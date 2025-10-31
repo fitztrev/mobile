@@ -1,9 +1,11 @@
+import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lichess_mobile/l10n/l10n.dart';
 import 'package:lichess_mobile/src/localizations.dart';
+import 'package:lichess_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:lichess_mobile/src/model/common/chess.dart';
 import 'package:lichess_mobile/src/model/common/perf.dart';
 import 'package:lichess_mobile/src/model/common/speed.dart';
@@ -11,6 +13,7 @@ import 'package:lichess_mobile/src/model/lobby/game_seek.dart';
 import 'package:lichess_mobile/src/model/puzzle/puzzle_angle.dart';
 import 'package:lichess_mobile/src/model/puzzle/puzzle_theme.dart';
 import 'package:lichess_mobile/src/tab_scaffold.dart';
+import 'package:lichess_mobile/src/view/analysis/analysis_screen.dart';
 import 'package:lichess_mobile/src/view/game/game_screen.dart';
 import 'package:lichess_mobile/src/view/game/game_screen_providers.dart';
 import 'package:lichess_mobile/src/view/puzzle/puzzle_screen.dart';
@@ -53,6 +56,18 @@ class QuickActionService {
             rootNavigator: true,
           ).push(GameScreen.buildRoute(context, source: LobbySource(recentSeeks[index])));
         }
+      } else if (shortcutType == 'analysis_board') {
+        Navigator.of(context, rootNavigator: true).push(
+          AnalysisScreen.buildRoute(
+            context,
+            const AnalysisOptions.standalone(
+              orientation: Side.white,
+              pgn: '',
+              isComputerAnalysisAllowed: true,
+              variant: Variant.standard,
+            ),
+          ),
+        ); 
       } else if (shortcutType == 'play_puzzles') {
         Navigator.of(
           context,
@@ -66,8 +81,14 @@ class QuickActionService {
   void setQuickActions(IList<GameSeek> recentSeeks) {
     quickActions.setShortcutItems(<ShortcutItem>[
       ShortcutItem(
+        type: 'analysis_board',
+        localizedTitle: l10n.analysis,
+        icon: platform == TargetPlatform.iOS ? 'BiotechIcon' : 'biotech',
+      ),
+
+      ShortcutItem(
         type: 'play_puzzles',
-        localizedTitle: l10n.puzzleDesc,
+        localizedTitle: l10n.puzzles,
         icon: platform == TargetPlatform.iOS ? 'ExtensionIcon' : 'extension',
       ),
 
