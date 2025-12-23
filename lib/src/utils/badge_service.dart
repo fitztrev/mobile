@@ -14,6 +14,7 @@ class BadgeService {
   final Logger _log;
 
   Future<void> setBadge(int value) async {
+    _log.info('🟡 Setting badge to $value');
     if (defaultTargetPlatform != TargetPlatform.iOS) {
       return;
     }

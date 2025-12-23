@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "lichess-testing-df65f",
+          "appId": "1:1035134066138:android:e21c87e2fb5e44634274e3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "lichess-testing-df65f",
+          "configurations": {
+            "android": "1:1035134066138:android:e21c87e2fb5e44634274e3",
+            "ios": "1:1035134066138:ios:6a2dc54d8d252b3d4274e3"
+          }
+        }
+      }
+    }
+  }
+}

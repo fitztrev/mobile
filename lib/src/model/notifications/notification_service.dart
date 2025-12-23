@@ -46,6 +46,7 @@ typedef ParsedLocalNotification = (NotificationResponse response, LocalNotificat
 /// It broadcasts the parsed incoming FCM messages to the [fcmMessageStream].
 ///
 /// It also listens for notification interaction responses and dispatches them to the [responseStream].
+@pragma('vm:entry-point')
 class NotificationService {
   NotificationService(this._ref);
 
@@ -107,7 +108,7 @@ class NotificationService {
 
     // Request permission to receive notifications. Pop-up will appear only
     // once.
-    await LichessBinding.instance.firebaseMessaging.requestPermission(
+    final notificationSettings = await LichessBinding.instance.firebaseMessaging.requestPermission(
       alert: true,
       badge: true,
       sound: true,
@@ -116,11 +117,13 @@ class NotificationService {
       criticalAlert: false,
       provisional: false,
     );
+    _logger.info('🟡 Notification permission status: ${notificationSettings.authorizationStatus}');
 
     // Listen for token refresh and update the token on the server accordingly.
     _fcmTokenRefreshSubscription = LichessBinding.instance.firebaseMessaging.onTokenRefresh.listen((
       String token,
     ) {
+      _logger.info('🟡 FCM token refresh triggered, new token received');
       _registerToken(token);
     });
 
@@ -276,11 +279,15 @@ class NotificationService {
     /// Whether the message was received while the app was in the background.
     required bool fromBackground,
   }) async {
-    _logger.fine(
-      'Processing a FCM message from ${fromBackground ? 'background' : 'foreground'}: ${message.data}',
+    _logger.info(
+      '🟡 Processing a FCM message from ${fromBackground ? 'background' : 'foreground'}: ${message.data}',
     );
 
     final parsedMessage = FcmMessage.fromRemoteMessage(message);
+
+    _logger.info(
+      '🟡 FCM message parsed as ${parsedMessage.runtimeType} from ${fromBackground ? 'background' : 'foreground'}',
+    );
 
     _fcmMessageStreamController.add((message: parsedMessage, fromBackground: fromBackground));
 
@@ -386,8 +393,11 @@ class NotificationService {
     await lichessBinding.preloadSharedPreferences();
     await ref.read(preloadedDataProvider.future);
 
+    _logger.info('🟡 Background handler initialized for FCM message');
+
     try {
       await ref.read(notificationServiceProvider)._processFcmMessage(message, fromBackground: true);
+      _logger.info('🟡 Background handler completed successfully');
 
       ref.dispose();
     } catch (e) {
