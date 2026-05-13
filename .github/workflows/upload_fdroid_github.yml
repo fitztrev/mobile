@@ -10,6 +10,8 @@ permissions:
 jobs:
   github-upload:
     runs-on: ubuntu-latest
+    outputs:
+      release_tag: ${{ steps.release_tag.outputs.RELEASE_TAG }}
     steps:
       - name: Checkout mobile code
         uses: actions/checkout@v6
@@ -73,13 +75,32 @@ jobs:
           done
 
       - name: Determine release tag
+        id: release_tag
         run: |
           TRIGGER_TAG=${GITHUB_REF#refs/tags/}
           RELEASE_TAG=${TRIGGER_TAG%.fdroid}
-          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$RELEASE_TAG" >> $GITHUB_OUTPUT
 
       - name: Upload APKs
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
+          tag_name: ${{ steps.release_tag.outputs.RELEASE_TAG }}
           files: build/app/outputs/flutter-apk/*-fdroid.apk
+
+  s3_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: github-upload
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          merge-multiple: true
+      - run: sha256sum lichess-fdroid-*
+      - uses: shallwefootball/s3-upload-action@bcd7c2408245fd6cd19b5512a473b1a7a8b48a35
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_bucket: lichess-fdroid-releases
+          source_dir: .
+          destination_dir: ${{ needs.github-upload.outputs.release_tag }}
