@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1035134066138",
-    "project_id": "lichess-testing-df65f",
-    "storage_bucket": "lichess-testing-df65f.firebasestorage.app"
+    "project_number": "874926438776",
+    "project_id": "lichess-preview",
+    "storage_bucket": "lichess-preview.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1035134066138:android:abaec65310e2b0e44274e3",
+        "mobilesdk_app_id": "1:874926438776:android:43ddeb2bc0dd3f1359f08d",
         "android_client_info": {
           "package_name": "org.lichess.mobileV2.debug"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCWI-H9yp_O1vNAjhxhLOpbk4_Oy78HaEo"
+          "current_key": "AIzaSyDh3zZxqFF1LguDaGN40bmxFQ6PSNDQedg"
         }
       ],
       "services": {
