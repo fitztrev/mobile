@@ -10,7 +10,12 @@ import 'package:lichess_mobile/src/model/settings/log_preferences.dart';
 import 'package:lichess_mobile/src/utils/lru_list.dart';
 import 'package:logging/logging.dart';
 
-const _loggersToShowInTerminal = {'HttpClient', 'Socket', 'EvaluationService'};
+const _loggersToShowInTerminal = {
+  'HttpClient',
+  'Socket',
+  'EvaluationService',
+  'NotificationService',
+};
 
 /// Provides an instance of [AppLogService] using Riverpod.
 final appLogServiceProvider = Provider<AppLogService>(

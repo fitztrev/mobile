@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "974101866555",
-    "project_id": "lichessv2",
-    "storage_bucket": "lichessv2.appspot.com"
+    "project_number": "1035134066138",
+    "project_id": "lichess-testing-df65f",
+    "storage_bucket": "lichess-testing-df65f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:974101866555:android:91f3475b526b436bb8541e",
+        "mobilesdk_app_id": "1:1035134066138:android:abaec65310e2b0e44274e3",
         "android_client_info": {
           "package_name": "org.lichess.mobileV2.debug"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "974101866555-om4jq3npgepplk0fihrldnhuso1gm7k0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDQI6NZ5CM8xpuq9jfM0-D4Tq6fYfsaSh0"
+          "current_key": "AIzaSyCWI-H9yp_O1vNAjhxhLOpbk4_Oy78HaEo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "974101866555-om4jq3npgepplk0fihrldnhuso1gm7k0.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "974101866555-8ag66ua0p0pn1ab7u982i58a9iubhbod.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.lichess.mobileV2"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

@@ -276,11 +276,14 @@ class NotificationService {
     /// Whether the message was received while the app was in the background.
     required bool fromBackground,
   }) async {
-    _logger.fine(
-      'Processing a FCM message from ${fromBackground ? 'background' : 'foreground'}: ${message.data}',
+    _logger.info(
+      'Processing FCM message from ${fromBackground ? 'background' : 'foreground'}; '
+      'data: ${message.data}, '
+      'notification: ${message.notification != null ? '(title: ${message.notification!.title}, body: ${message.notification!.body})' : 'null'}',
     );
 
     final parsedMessage = FcmMessage.fromRemoteMessage(message);
+    _logger.info('Parsed FCM message as: ${parsedMessage.runtimeType}');
 
     _fcmMessageStreamController.add((message: parsedMessage, fromBackground: fromBackground));
 
@@ -296,8 +299,7 @@ class NotificationService {
         }
 
       case ChallengeCreateFcmMessage():
-        // nothing to do here in foreground as it should be handled by the socket
-        break;
+        _logger.info('ChallengeCreate: skipping notification (handled by socket)');
 
       case ChallengeAcceptFcmMessage(fullId: final fullId, notification: final notification):
         if (fromBackground == false && notification != null) {

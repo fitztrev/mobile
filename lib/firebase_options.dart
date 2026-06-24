@@ -47,20 +47,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDQI6NZ5CM8xpuq9jfM0-D4Tq6fYfsaSh0',
-    appId: '1:974101866555:android:91f3475b526b436bb8541e',
-    messagingSenderId: '974101866555',
-    projectId: 'lichessv2',
-    storageBucket: 'lichessv2.appspot.com',
+    apiKey: 'AIzaSyCWI-H9yp_O1vNAjhxhLOpbk4_Oy78HaEo',
+    appId: '1:1035134066138:android:644222924aab486e4274e3',
+    messagingSenderId: '1035134066138',
+    projectId: 'lichess-testing-df65f',
+    storageBucket: 'lichess-testing-df65f.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC48jXlu52bjsbINcl3ixrrMEAbDf1uh90',
-    appId: '1:974101866555:ios:1974acbdbcbfbe0eb8541e',
-    messagingSenderId: '974101866555',
-    projectId: 'lichessv2',
-    storageBucket: 'lichessv2.appspot.com',
-    iosClientId: '974101866555-8ag66ua0p0pn1ab7u982i58a9iubhbod.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCbZ59VAN51dGwy6FlNMpZkPqk15LYp7HI',
+    appId: '1:1035134066138:ios:594d6d67a1cac71a4274e3',
+    messagingSenderId: '1035134066138',
+    projectId: 'lichess-testing-df65f',
+    storageBucket: 'lichess-testing-df65f.firebasestorage.app',
     iosBundleId: 'org.lichess.mobileV2',
   );
 }
